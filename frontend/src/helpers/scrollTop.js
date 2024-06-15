@@ -1,5 +1,5 @@
-const scrollTop = () =>{
-    window.scrollTo({ top : 0 , behavior : 'smooth'})
-}
+const scrollTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
-export default scrollTop
+export default scrollTop;
