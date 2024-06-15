@@ -51,8 +51,8 @@ const paymentController = async (request, response) => {
           quantity: item.quantity,
         };
       }),
-      success_url: `${process.env.FRONTEND_URL}/success`,
-      cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+      success_url: `${"https://e-commerce-up-rithvikreddy.vercel.app"}/success`,
+      cancel_url: `${"https://e-commerce-up-rithvikreddy.vercel.app"}/cancel`,
     };
 
     // Create a Stripe Checkout session
