@@ -98,7 +98,7 @@ const Header = () => {
                   {/* Profile link */}
                   <Link
                     to={"/profile"}
-                    className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"
+                    className="whitespace-nowrap hover:bg-slate-100 p-2"
                     onClick={() => setMenuDisplay((prev) => !prev)}
                   >
                     Profile
@@ -109,7 +109,7 @@ const Header = () => {
                     <>
                       <Link
                         to={"/admin-panel/all-products"}
-                        className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"
+                        className="whitespace-nowrap hover:bg-slate-100 p-2"
                         onClick={() => setMenuDisplay((prev) => !prev)}
                       >
                         Admin Panel
