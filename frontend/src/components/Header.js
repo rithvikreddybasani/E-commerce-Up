@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Logo from "./Logo";
 import { GrSearch } from "react-icons/gr";
 import { FaRegCircleUser } from "react-icons/fa6";
@@ -21,6 +21,10 @@ const Header = () => {
   const URLSearch = new URLSearchParams(searchInput?.search);
   const searchQuery = URLSearch.getAll("q");
   const [search, setSearch] = useState(searchQuery);
+
+  useEffect(() => {
+    console.log("User state:", user);
+  }, [user]);
 
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -51,16 +55,20 @@ const Header = () => {
       navigate("/search");
     }
   };
+
   return (
     <header className="h-16 shadow-md bg-white fixed w-full z-40">
-      <div className=" h-full container mx-auto flex items-center px-4 justify-between">
+      <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div className="image">
           <Link to={"/"}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ70BXfEWC2ixFfjCOBdp4rCnNAj2X1sRF2XxI2IfPTKBsCP1KZSIwqpzDqBxL3ci8G5o&usqp=CAU" />
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ70BXfEWC2ixFfjCOBdp4rCnNAj2X1sRF2XxI2IfPTKBsCP1KZSIwqpzDqBxL3ci8G5o&usqp=CAU"
+              alt="Logo"
+            />
           </Link>
         </div>
 
-        <div className="hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2">
+        <div className="flex items-center w-full lg:max-w-sm border rounded-full focus-within:shadow pl-2">
           <input
             type="text"
             placeholder="search product here..."
@@ -78,7 +86,7 @@ const Header = () => {
             {user?._id && (
               <div
                 className="text-3xl cursor-pointer relative flex justify-center"
-                onClick={() => setMenuDisplay((preve) => !preve)}
+                onClick={() => setMenuDisplay((prev) => !prev)}
               >
                 {user?.profilePic ? (
                   <img
@@ -95,7 +103,6 @@ const Header = () => {
             {menuDisplay && (
               <div className="absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded">
                 <nav>
-                  {/* Profile link */}
                   <Link
                     to={"/profile"}
                     className="whitespace-nowrap hover:bg-slate-100 p-2"
@@ -103,18 +110,14 @@ const Header = () => {
                   >
                     Profile
                   </Link>
-
-                  {/* Admin Panel link for admin users */}
                   {user?.role === ROLE.ADMIN && (
-                    <>
-                      <Link
-                        to={"/admin-panel/all-products"}
-                        className="whitespace-nowrap hover:bg-slate-100 p-2"
-                        onClick={() => setMenuDisplay((prev) => !prev)}
-                      >
-                        Admin Panel
-                      </Link>
-                    </>
+                    <Link
+                      to={"/admin-panel/all-products"}
+                      className="whitespace-nowrap hover:bg-slate-100 p-2"
+                      onClick={() => setMenuDisplay((prev) => !prev)}
+                    >
+                      Admin Panel
+                    </Link>
                   )}
                 </nav>
               </div>
@@ -126,7 +129,6 @@ const Header = () => {
               <span>
                 <FaShoppingCart />
               </span>
-
               <div className="bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
                 <p className="text-sm">{context?.cartProductCount}</p>
               </div>
